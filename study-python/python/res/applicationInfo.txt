@@ -1,0 +1,6 @@
+ClientID
+bg8bHjj3T_f8BIOx9EbI
+Client Secret
+y4BsA_TfTD
+일반 인증키(UTF-8)
+lUb6ajXWCK0qhkX2v7TMP2TtcGNlJXgtfyoipeGaet9JEpCSgg6CNfqzWN%2BABnLF9gTFVgAtjNQe5Kh2ohxzyQ%3D%3D

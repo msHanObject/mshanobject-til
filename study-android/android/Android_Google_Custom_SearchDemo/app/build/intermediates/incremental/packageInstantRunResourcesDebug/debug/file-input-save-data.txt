@@ -1,0 +1,18 @@
+#Internal package file, do not edit.
+#Thu Nov 16 16:27:42 KST 2017
+1.base=/Users/nulgrace/AndroidStudioProjects/Android_Google_Custom_SearchDemo/app/build/intermediates/res/debug/resources-debug.ap_
+4.file=/Users/nulgrace/AndroidStudioProjects/Android_Google_Custom_SearchDemo/app/build/intermediates/res/debug/resources-debug.ap_/res/menu/main.xml
+1.file=/Users/nulgrace/AndroidStudioProjects/Android_Google_Custom_SearchDemo/app/build/intermediates/res/debug/resources-debug.ap_/resources.arsc
+4.set=ANDROID_RESOURCE
+2.base=/Users/nulgrace/AndroidStudioProjects/Android_Google_Custom_SearchDemo/app/build/intermediates/res/debug/resources-debug.ap_
+3.set=ANDROID_RESOURCE
+2.set=ANDROID_RESOURCE
+2.file=/Users/nulgrace/AndroidStudioProjects/Android_Google_Custom_SearchDemo/app/build/intermediates/res/debug/resources-debug.ap_/res/drawable-xxhdpi-v4/ic_launcher.png
+count=5
+1.set=ANDROID_RESOURCE
+3.base=/Users/nulgrace/AndroidStudioProjects/Android_Google_Custom_SearchDemo/app/build/intermediates/res/debug/resources-debug.ap_
+0.set=ANDROID_RESOURCE
+0.base=/Users/nulgrace/AndroidStudioProjects/Android_Google_Custom_SearchDemo/app/build/intermediates/res/debug/resources-debug.ap_
+3.file=/Users/nulgrace/AndroidStudioProjects/Android_Google_Custom_SearchDemo/app/build/intermediates/res/debug/resources-debug.ap_/res/layout/activity_main.xml
+0.file=/Users/nulgrace/AndroidStudioProjects/Android_Google_Custom_SearchDemo/app/build/intermediates/res/debug/resources-debug.ap_/AndroidManifest.xml
+4.base=/Users/nulgrace/AndroidStudioProjects/Android_Google_Custom_SearchDemo/app/build/intermediates/res/debug/resources-debug.ap_

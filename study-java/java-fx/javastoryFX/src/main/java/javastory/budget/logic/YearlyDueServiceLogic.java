@@ -1,0 +1,76 @@
+package javastory.budget.logic;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javastory.budget.da.file.BudgetStoreFileLycler;
+import javastory.budget.entity.account.YearlyDue;
+import javastory.budget.service.YearlyDueService;
+import javastory.budget.service.dto.YearlyDueDto;
+import javastory.budget.store.YearlyDueStore;
+import javastory.budget.util.exception.NoSuchYearlyDueException;
+import javastory.budget.util.exception.YearlyDueDuplicationException;
+
+public class YearlyDueServiceLogic implements YearlyDueService {
+	//
+	private YearlyDueStore yearlyDueStore;
+	
+	public YearlyDueServiceLogic() {
+		//
+//		yearlyDueStore = StoreMapLycler.getInstance().requestYearlyDueStore();
+		yearlyDueStore = BudgetStoreFileLycler.shareInstance().requestYearlyDueStore();
+	}
+	
+	@Override
+	public void add(YearlyDueDto yearlyDueDto) {
+		//
+		String year = yearlyDueDto.getYear();
+		if (yearlyDueStore.isExist(year)) {
+			throw new YearlyDueDuplicationException("There is already exists with --> " + year);
+		}
+		
+		YearlyDue yearlyDue = yearlyDueDto.toYearlyDue(); 
+		yearlyDueStore.add(yearlyDue);
+	}
+
+	@Override
+	public YearlyDueDto retrieve(String yearFound) {
+		// 
+		YearlyDue yearlyDue = yearlyDueStore.retrieve(yearFound); 
+		if (yearlyDue == null) {
+			throw new NoSuchYearlyDueException("There is no yearlydue with year --> " + yearFound);
+		}
+		
+		return new YearlyDueDto(yearlyDue);
+	}
+
+	@Override
+	public void modify(YearlyDueDto target) {
+		// 
+		yearlyDueStore.modify(target.toYearlyDue());
+	}
+
+	@Override
+	public void delete(String year) {
+		// 
+		if(!yearlyDueStore.isExist(year)) {
+			throw new NoSuchYearlyDueException("There is no yearlydue with year --> " + year);
+		}
+		yearlyDueStore.delete(year);
+	}
+
+	@Override
+	public List<YearlyDueDto> retrieveAll() {
+		//
+		List<YearlyDue> yearlyDues = yearlyDueStore.retrieveAll();
+		if (yearlyDues == null) {
+			throw new NoSuchYearlyDueException("There is no yearlyDue at all");
+		}
+		
+		List<YearlyDueDto> yearlyDueDtos = new ArrayList<>();
+		for (YearlyDue yearlyDue : yearlyDues) {
+			yearlyDueDtos.add(new YearlyDueDto(yearlyDue));
+		}
+		return yearlyDueDtos;
+	}
+}

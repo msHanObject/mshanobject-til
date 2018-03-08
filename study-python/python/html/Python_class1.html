@@ -1,0 +1,311 @@
+﻿<h1 id="python-first-class">Python   <strong><em>First</em></strong> Class</h1>
+
+<h3 id="hello-world"><em><strong>Hello World</strong></em></h3>
+
+<p>어떤 프로그램 언어든 처음은 항상 “Hello World”를 맞이하는 방법부터 시작합니다. <br>
+<code>파이썬(Python)</code>은 매우 간단하게 <code>print()</code> 라는 함수를 통하여 출력하고 싶은 문자열을 출력할 수 있게 해줍니다. <code>()</code> 안에 들어갈 내용은 문자열이면  <code>''</code>나 <code>""</code>으로 감싸주고, 숫자일 경우 그냥 입력하시면 됩니다. </p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>print(<span class="hljs-string">"Hello World"</span>)
+    print(<span class="hljs-string">'Hi'</span>)
+    print(<span class="hljs-number">1234</span>)
+    print(<span class="hljs-string">"This is Minsu's Note."</span>)</code></pre>
+
+<pre class="prettyprint"><code class=" hljs vbnet">Hello World
+Hi
+<span class="hljs-number">1234</span>
+This <span class="hljs-keyword">is</span> Minsu<span class="hljs-comment">'s Note.</span></code></pre>
+
+<p>문자열 출력에 관해 <code>파이썬</code>은  한가지 더 살펴 볼 것이 있습니다. <br>
+아래 예시를 통해 살펴 보겠습니다…</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>print(<span class="hljs-string">"""Hello
+    Python
+    World"""</span>)</code></pre>
+
+<pre class="prettyprint"><code class=" hljs ">Hello
+Python
+World</code></pre>
+
+<p>여러줄 문자열을 표현하고 싶을때 다른 언어에서는 <code>escape(이스케이프)</code>문자를 통해 <code>\n</code>을 이용하여 여러줄을 표현하였는데 파이썬에서는 <code>""" 나 '''</code>처럼 따옴표 세개를 연속으로 붙여서 쓰면 위의 예시처럼 여러줄 문자열을 한번에 표현할 수 있습니다.</p>
+
+<h3 id="format-specifier"><em><strong>Format Specifier</strong></em></h3>
+
+<p>단순한 출력을 벗어나서 <em>문자열 포맷</em> 을 이용하여 출력 형식을 지정하여 출력 해봅시다. <br>
+먼저 <code>%s</code>, <code>%d</code>에 대해 알아보면… <br>
+ <code>%s</code> 는 문자열을 지정받아 출력하고,  <code>%d</code>는 숫자를 지정받아 출력합니다.</p>
+
+
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>print(<span class="hljs-string">"%s apples"</span> %<span class="hljs-string">'five'</span>)</code></pre>
+
+<p><code>five apples</code></p>
+
+
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>print(<span class="hljs-string">"%d apples"</span> %<span class="hljs-number">5</span>)</code></pre>
+
+<p><code>5 apples</code></p>
+
+<p>또한, 문자열이나 숫자를 특정 변수에 담아서 그 변수를 통해 값을 출력 할 수도 있습니다.  </p>
+
+
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>number =<span class="hljs-number">3</span>
+    print(<span class="hljs-string">"% apple"</span> %number)</code></pre>
+
+<p><code>3apple</code> <br>
+<br></p>
+
+<h3 id="인덱싱indexing"><em><strong>인덱싱(Indexing)</strong></em></h3>
+
+<p>다음은 인덱싱(Indexing)에 관해 살펴보도록하겠습니다. 우선 인덱싱(Indexing)이란… <br>
+ 무엇인가를 <strong>“가리킨다”</strong>는 의미이며 각 문자에 대해 숫자 0부터 시작하여 차례로 1씩 증가된 Index가 붙습니다.</p>
+
+<p>간단히 살펴보면…</p>
+
+<pre class="prettyprint"><code class=" hljs cs">Life <span class="hljs-keyword">is</span> too <span class="hljs-keyword">short</span>, You need Python
+<span class="hljs-number">0</span>         <span class="hljs-number">1</span>         <span class="hljs-number">2</span>         <span class="hljs-number">3</span> 
+<span class="hljs-number">0123456789012345678901234567890123</span></code></pre>
+
+<p>위의 예시처럼, 각 문자열에 대해 <em>Index</em>가 붙으며 그 시작은 0입니다.</p>
+
+<h4 id="문자열-인덱싱"><em><strong>문자열 인덱싱</strong></em></h4>
+
+<p>이를 활용하여 <code>문자열 인덱싱</code> 에 대해 살펴보겠습니다. <br>
+아래와 같이 <code>a</code> 문자열에 대해 각 인덱스 번호를 조합하여 <code>hello</code> 가 출력되도록 할 수도 있습니다.</p>
+
+
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>a = <span class="hljs-string">"life is too short, You need Python"</span>
+    print(a[<span class="hljs-number">13</span>] + a[<span class="hljs-number">3</span>] + a[<span class="hljs-number">0</span>] + a[<span class="hljs-number">0</span>] + a[<span class="hljs-number">9</span>])</code></pre>
+
+<p><code>hello</code></p>
+
+<h4 id="문자열-슬라이싱"><em><strong>문자열 슬라이싱</strong></em></h4>
+
+<p>문자열 슬라이싱은 위의 예시처럼 어떤 문자열에서 필요한 부분만 뽑아내기 위해 사용되는 것입니다. <br>
+다만 위의 예시와 차이점은 위의 예시는 각 문자 하나씩을 뽑아서 조합한 것이고, 슬라이싱은 문자열의 범위를 지정하여 문자 하나 이상을 뽑아낼 수 있다는 것입니다.</p>
+
+<p>그럼 아래 예시를 살펴 보도록 하겠습니다…</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>a = <span class="hljs-string">"20010331Rainy"</span>
+<span class="hljs-prompt">&gt;&gt;&gt; </span>year = a[:<span class="hljs-number">4</span>]
+<span class="hljs-prompt">&gt;&gt;&gt; </span>day = a[<span class="hljs-number">4</span>:<span class="hljs-number">8</span>]
+<span class="hljs-prompt">&gt;&gt;&gt; </span>weather = a[<span class="hljs-number">8</span>:]
+<span class="hljs-prompt">&gt;&gt;&gt; </span>year
+<span class="hljs-string">'2001'</span>
+<span class="hljs-prompt">&gt;&gt;&gt; </span>day
+<span class="hljs-string">'0331'</span>
+<span class="hljs-prompt">&gt;&gt;&gt; </span>weather
+<span class="hljs-string">'Rainy'</span></code></pre>
+
+<p>예시에서 <code>[:]</code> 이런 형태가 눈에 보일 텐데요… 이것이 슬라이싱입니다. <br>
+[ ] 안에 <code>[시작번호:끝번호]</code>형태로 문자열에서 뽑아내고 싶은 범위를 지정하는 것 입니다. <br>
+다만 주의할 점은 <code>시작번호</code>는 범위에 포함되지만 <code>끝번호</code>는 범위에 포함되지 않습니다.</p>
+
+<h4 id="리스트인덱싱"><em><strong>리스트인덱싱</strong></em></h4>
+
+<p>그럼 이번에는 <code>리스트 인덱싱</code> 에 대해 살펴보겠습니다. <br>
+아래와 같이 리스트 변수 <code>a, b, c, d</code>를 선언하였습니다.</p>
+
+
+
+<pre class="prettyprint"><code class="language-python hljs ">a=[]
+b=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+c=[<span class="hljs-string">'sunny'</span>, <span class="hljs-string">'rainy'</span>]
+d=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,[<span class="hljs-string">'sunny'</span>,<span class="hljs-string">'rainy'</span>]]</code></pre>
+
+<p>리스트는 <code>a=[]</code>처럼 아무런 요소를 갖고 있지 않은 <em>빈 리스트</em> 일 수도 있으며… <br>
+보통은 리스트 <code>b</code>와 <code>c</code>처럼 <em>문자열</em> 이나 <em>숫자형</em> 요소를 갖고 있습니다. <br>
+그리고 <code>d</code> 처럼 <em>리스트</em>  자체를 요소로 갖는 리스트도 있을 수 있습니다.</p>
+
+<p>그럼 위에 선언 된 값을 바탕으로 아래 예시를 살펴보면 <code>b[-1]</code>은 무엇을 뜻할까요?</p>
+
+
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>b[-<span class="hljs-number">1</span>]</code></pre>
+
+<p><code>3</code></p>
+
+<p>출력된 <code>3</code> 을 통해 알수 있듯이 리스트 요소를 거꾸로 카운팅하기 위해 <code>-</code> 기호를 사용하여 <code>-1</code> 은 뒤에서 부터 첫번째를 의미합니다. 그리고 리스트의 내부 리스트 요소는 아래와 같은 방식으로 출력이 가능합니다.</p>
+
+
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>print(d[-<span class="hljs-number">1</span>])
+    print(d[-<span class="hljs-number">1</span>][<span class="hljs-number">0</span>])
+    print(d[-<span class="hljs-number">1</span>][<span class="hljs-number">1</span>])</code></pre>
+
+<p><code>['sunny', 'rainy']</code> <br>
+<code>sunny</code> <br>
+<code>rainy</code></p>
+
+<p><br></p>
+
+
+
+<h3 id="조건문"><em><strong>조건문</strong></em></h3>
+
+<p>그럼 방금 배운 리스트를 활용하여 <code>조건문</code> 에 대해 알아 보겠습니다. <br>
+먼저 아래와 같이 리스트 변수 <code>pocket</code> 을 선언하겠습니다.</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>pocket=[<span class="hljs-string">'card'</span>, <span class="hljs-string">'phone'</span>, <span class="hljs-string">'money'</span>]</code></pre>
+
+<p>그럼 이야기를 붙여 보겠습니다. <br>
+우리 <code>pocket</code>(주머니)에 <code>'money'</code>(돈)이 있으면 <code>'taxt'</code>를 타고, <br>
+아니면 집까지 <code>'walk'</code>를 해야 하는 상황입니다. 우린 걸어가게 될까요? 택시를 타고 가게 될까요? <br>
+<code>파이썬</code> 에게 물어보죠~^^</p>
+
+
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span><span class="hljs-keyword">if</span> <span class="hljs-string">'money'</span> <span class="hljs-keyword">in</span> pocket:
+        print(<span class="hljs-string">'taxi'</span>)
+    <span class="hljs-keyword">else</span>:
+        print(<span class="hljs-string">'walk'</span>)</code></pre>
+
+<p><code>taxi</code></p>
+
+<p>다행히 힘들이지 않고 택시를 타고 집에 갈 수 있게 되었네요~^^ <br>
+그럼 다음 이야기를 한번 살펴 보죠 !</p>
+
+<p>이번 이야기는 주머니에 <code>cash</code> 가 있으면 <code>taxi</code> 를 부르고, <code>card</code> 가 있으면 <code>card taxi</code> 를 부르는 겁니다. <br>
+만약 둘다 없으면?  <code>walk</code> 하게 되겠죠…ㅠㅠ <br>
+이번에도 <code>파이썬</code> 에게 불어 보겠습니다.</p>
+
+
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>pocket=[<span class="hljs-string">'card'</span>, <span class="hljs-string">'phone'</span>, <span class="hljs-string">'money'</span>]
+    <span class="hljs-keyword">if</span> <span class="hljs-string">'cash'</span> <span class="hljs-keyword">in</span> pocket:
+        print(<span class="hljs-string">'taxi'</span>)
+    <span class="hljs-keyword">elif</span> <span class="hljs-string">'card'</span> <span class="hljs-keyword">in</span> pocket:
+        print(<span class="hljs-string">'card taxi'</span>)
+    <span class="hljs-keyword">else</span>:
+        print(<span class="hljs-string">'walk'</span>)</code></pre>
+
+<p><code>card taxi</code></p>
+
+<p>다행히 이번엔 <code>card</code> 가 있었네요~^^ 덕분에 <code>card taxi</code> 를 타고 집에 잘 갔습니다.</p>
+
+<p><br></p>
+
+
+
+<h3 id="반복문"><em><strong>반복문</strong></em></h3>
+
+<p>이번엔 여태 배운 <code>문자열 포맷</code>과 <code>조건문</code>을 포함한 채로 <code>반복문</code>을 새롭게 배워 보겠습니다. <br>
+<code>반복문</code>은 <code>for A in B</code> 이라는 문법을 통해, 배열이나 리스트형 변수 <code>B</code> 로 부터 차례로 각 요소를 <code>A</code> 라는 변수에 담아서 처리를 합니다.</p>
+
+<p>아래 예시를 통해 추가 설명을 진행하겠습니다…</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>scores=[<span class="hljs-number">99</span>,<span class="hljs-number">25</span>,<span class="hljs-number">67</span>,<span class="hljs-number">75</span>,<span class="hljs-number">80</span>]
+<span class="hljs-prompt">&gt;&gt;&gt; </span>number=<span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> score <span class="hljs-keyword">in</span> scores:
+        number=number+<span class="hljs-number">1</span>
+        <span class="hljs-keyword">if</span> score &gt;= <span class="hljs-number">60</span> :
+            print(<span class="hljs-string">"%d 번 학생 합격"</span> %number)
+        <span class="hljs-keyword">else</span>:
+            print(<span class="hljs-string">"%d 번 학생 불합격"</span> %number)</code></pre>
+
+
+
+<pre class="prettyprint"><code class=" hljs ">1 번 학생 합격
+2 번 학생 불합격
+3 번 학생 합격
+4 번 학생 합격
+5 번 학생 합격</code></pre>
+
+<p>예시를 보시면 우선 <code>scores</code>라는 리스트형 변수에 숫자형 요소들을 포함한 채로 선언하였습니다. <br>
+그 다음, <code>number</code>라는 변수를 0으로 초기화 시키고 위에 선언하였던 <code>scores</code>로 부터 각 숫자형 요소를 <code>score</code>라는 변수에 담아서 <code>조건문</code>을 수행하고 있습니다.</p>
+
+<p>요약하자면 점수가 60점 이상인 학생들은 합격이라는 문구를 출력하고 60점 미만인 학생은 불합격을 출력하는 내용입니다. <code>number</code>는 각 학생들을 구분하기 위해 <code>반복문</code>이 진행되는 동안 값을 1씩 증가시켜 번호를 매겨주기 위한 변수였습니다.</p>
+
+<p><br></p>
+
+<h3 id="함수"><em><strong>함수</strong></em></h3>
+
+<p>다음은 함수에 대해 알아 보겠습니다. 먼저 아래 예시를 보겠습니다.</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sum</span><span class="hljs-params">(a,b)</span>:</span>
+    <span class="hljs-keyword">return</span> a+b</code></pre>
+
+<p>예시를 풀이하자면 아래와 같습니다.</p>
+
+<blockquote>
+  <p>“이 함수의 이름(함수명)은 sum이고 입력 인수로 2개의 값을 받으며 결과값은 2개의 입력값을 더한 값이다.”</p>
+</blockquote>
+
+<p>여기서 <code>def</code>는 함수를 정의하기 위한 예약어이고, <code>return</code>은 반환값을 위한 예약어입니다. <br>
+그럼 위의 예시를 일반화 시키면 아래와 같습니다.</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-function"><span class="hljs-keyword">def</span> 함수이름<span class="hljs-params">(입력인수)</span>:</span>
+    &lt;수행할 문장&gt;
+    ...
+    <span class="hljs-keyword">return</span> 결과값</code></pre>
+
+<p>앞으로 사용자 정의 함수를 사용할때 위와 같은 형태로 선언하고 사용하게 될 것입니다. <br>
+여기서 또 한가지…! <strong>주목할 점</strong>이 있습니다. <br>
+파이썬은 <em>입력인수값</em> 이 꼭 필요하지도, <em>반환값</em> 이 꼭 필요하지도 않습니다. <br>
+따라서, <em>입력 인수</em> 가 아예 없을 수도 있고, <em>반환값</em> 이 없는 void형일 수도 있습니다. <br>
+<br>
+위의 <code>sum</code>함수를 사용해보면 풀이대로 입력받은 두 인수의 값을 합을 반환합니다.</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>a=<span class="hljs-number">3</span>
+    b=<span class="hljs-number">4</span>
+    c=sum(a,b)
+    print(c)</code></pre>
+
+<p><code>7</code></p>
+
+<p>또다른 함수 정의 방법은 <code>lambda</code>를 이용하는 것 입니다. <code>lambda</code>는 함수를 생성할 때 사용하는 예약어로, def와 동일한 역할을 합니다. 보통 함수를 한줄로 간결하게 만들 때 사용하는데… <br>
+우리말로는 “람다”라고 읽고, <code>def</code>를 사용해야 할 정도로 복잡하지 않거나 def를 사용할 수 없는 곳에 주로 쓰입니다.  사용법은 아래 예시와 같습니다.</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>myfunction=<span class="hljs-keyword">lambda</span> a,b: a+b
+<span class="hljs-prompt">&gt;&gt;&gt; </span>myfunction (<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)</code></pre>
+
+<p><code>5</code></p>
+
+<p><br></p>
+
+<h3 id="파일-읽고-쓰기"><em><strong>파일 읽고 쓰기</strong></em></h3>
+
+
+
+<h4 id="파일-읽기read"><em><strong>파일 읽기(Read)</strong></em></h4>
+
+<p>이번에는 파일을 읽어와서 출력하는 작업을 해보겠습니다. <br>
+아래 예시를 통해 설명을 이어 나가겠습니다…</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span>f=open(<span class="hljs-string">"/파일경로../파일명"</span>,<span class="hljs-string">"r"</span>)
+lines = f.readlines()
+<span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:
+    print(line)
+f.close</code></pre>
+
+<p>우선, 위의 예시를 풀이하면 아래 내용와 같습니다.</p>
+
+<blockquote>
+  <p>“/파일경로”에 있는 파일을 “r” (읽기) 하여 f 라는 파일 변수에 할당하였고, f 에 담겨 있는 파일을 한줄씩 읽어서 lines 라는 변수에 담았다. 반복문을 통하여 lines 에 담겨 있는 파일의 각 라인을 한줄씩 출력하고 반복문이 끝나면 사용한 f 라는 파일 변수는 닫겠다.</p>
+</blockquote>
+
+<p>따라서 어떤 파일을 사용하기 위해 <code>open</code> 이라는 함수를 통해 파일을 열고, <code>readlines()</code>라는 함수를 통해 파일의 내용을 한줄씩 읽어서 리스트화 시킨 뒤에 리스트 변수에 담긴 내용을 반복문을 통해 출력하면 간단히 파일을 읽어 볼 수 있는 작업을 할 수 있게 됩니다.</p>
+
+<p>위의 예시처럼 파일작업을 하고 나면 항상 <code>.close</code>를 해주어야 합니다. 하지만 매번 이렇게 선언해주는 것도 귀찮고 불편하다고 생각 될 수 있습니다. <br>
+이럴때 자동으로 파일작업이 끝나면 <code>.close</code>를 호출해주는 <code>with</code>문을 이용하면 됩니다. <br>
+위의 예시를 <code>with</code>문을 활용한 코드로 변환하면 아래와 같습니다.</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span><span class="hljs-keyword">with</span> open(<span class="hljs-string">"/파일경로.../파일명"</span>,<span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> f:
+    lines= f.readlines()
+    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:
+        print(line)</code></pre>
+
+<p><br></p>
+
+<h4 id="파일-쓰기"><em><strong>파일 쓰기</strong></em></h4>
+
+<p>이번에는 파일쓰기를 해보겠습니다. 파일쓰기도 읽기와 마찬가지로 <code>with</code>문을 활용하여 아래 예시를 작성해보았습니다.</p>
+
+<pre class="prettyprint"><code class="language-python hljs "><span class="hljs-prompt">&gt;&gt;&gt; </span><span class="hljs-keyword">with</span> open(<span class="hljs-string">"/파일경로.../파일명"</span>,<span class="hljs-string">"w"</span>) <span class="hljs-keyword">as</span> f:
+    f.write(<span class="hljs-string">"You are happy"</span>)</code></pre>
+
+<p>위의 예시대로라면 <code>"/파일경로.../"</code>에 <code>"파일명"</code>을 가진 파일이 생성 되었을 겁니다. <br>
+그리고 그 파일의 내용은 <code>You are happy</code>가 있을 겁니다. <br>
+파일 쓰기와 읽기 작업과 차이점은 <code>"r"</code>대신 <code>"w"</code>가 쓰였다는 점과 쓰기 작업을 하려는 문장을 <code>.write()</code>를 통해 처리하였다는 것입니다.</p>

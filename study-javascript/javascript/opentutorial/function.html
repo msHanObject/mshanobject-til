@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>function</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    var numbering = function(i,j){
+      var sum = j;
+      document.write('i=1, j=10, ' + ' sum = i + j' + '<br/>');
+      while(i < j){
+        document.write('i = ' + i + '<br/>');
+        sum += i++;
+        document.write('sum = ' + sum + '<br/>');
+      }
+    }
+    numbering(1,10);
+    </script>
+  </body>
+</html>
