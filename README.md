@@ -1,6 +1,6 @@
 TIL
 ===
 
->> Today I Learned
+> Today I Learned
 
 A collection of files I studied
