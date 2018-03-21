@@ -137,5 +137,5 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/intellij
-./javascript/nodejs/expressSample/node_modules/*
+./**/node_modules
 .env
