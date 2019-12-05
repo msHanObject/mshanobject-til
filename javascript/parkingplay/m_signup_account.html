@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="파킹플레이는 IoT 주차 센서를 이용한 실시간 주차 정보 제공 및 예약 플랫폼입니다.">
+    <meta name="author" content="(주)에스앤씨랩">
+    <meta property="og:title" content="(주)에스앤씨랩">
+    <meta property="og:description" content="파킹플레이는 IoT 주차 센서를 이용한 실시간 주차 정보 제공 및 예약 플랫폼입니다.">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, width=device-width">
+    <!-- <meta name="format-detection" content="telephone=no"> -->
+    <meta name="HandheldFriendly" content="true">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <!-- <meta name="msapplication-TileImage" content="/img/favicon/ms-icon-144x144.png"> -->
+    <!-- <link rel="manifest" href="/img/favicon/manifest.json"> -->
+    <link rel="canonical" href="https://www.parkingplay.kr/">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/ui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700" rel="stylesheet">
+    <!-- <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script> -->
+    <title>회원가입 정보 입력 페이지</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div>
+            <button class="cancel_btn"><span class="hidden">회원가입 취소</span></button>
+        </div>
+        <div class="stepper">
+            <p class="hidden">회원가입 단계</p>
+            <ul>
+                <li>
+                    <div class="inactive_index_container">
+                        <div class="center inactive_index">1<span class="hidden">단계</span></div>
+                    </div>
+                    <div class="step_name">약관동의</div>
+                </li>
+                <li>
+                    <div class="active_index_container">
+                        <div class="center active_index">2<span class="hidden">단계</span></div>
+                    </div>
+                    <div class="step_name">정보입력</div>
+                </li>
+                <li>
+                    <div>
+                        <div class="center">3<span class="hidden">단계</span></div>
+                    </div>
+                    <div class="step_name">휴대 전화 인증</div>
+                </li>
+                <li>
+                    <div>
+                        <div class="center">4<span class="hidden">단계</span></div>
+                    </div>
+                    <div class="step_name">가입완료</div>
+                </li>
+            </ul>
+        </div>
+        <div class="header">
+            <h1 class="hidden">회원가입</h1>
+            <h2>정보 입력</h2>
+            <p class="step_des">파킹플레이 계정으로 사용할<br />아이디와 비밀번호를 입력해주세요.</p>
+        </div>
+        <div class="form_container">
+            <form action="#" method="post" name="account_form" target="#">
+                <ul>
+                    <li>
+                        <div id="create_id_inputfield" class="input_container">
+                            <label class="floating" for="create_id">아이디</label>
+                            <input class="field" type="text" name="create_id" id="create_id" value="" required maxlength="20">
+                        </div>
+                        <p class="create_condition">영어, 숫자만 사용할 수 있습니다.</p>
+                    </li>
+                    <li>
+                        <div id="create_pw_inputfield" class="input_container">
+                            <label class="floating" for="create_pw">비밀번호</label>
+                            <input class="field" type="password" name="create_pw" id="create_pw" value="" required
+                                maxlength="20">
+                            <div class="pw_check_container">
+                                <input class="hidden" type="checkbox" name="create_pw_check" id="create_pw_check"
+                                    value="false">
+                                <label for="create_pw_check">비밀번호 <span>표시</span></label>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="confirm_pw_inputfield" class="input_container">
+                            <label class="floating" for="confirm_pw">비밀번호 재입력</label>
+                            <input class="field" type="password" name="confirm_pw" id="confirm_pw" value="" required
+                                maxlength="20">
+                            <div class="pw_check_container">
+                                <input class="hidden" type="checkbox" name="confirm_pw_check" id="confirm_pw_check"
+                                    value="false">
+                                <label for="confirm_pw_check">비밀번호 <span>표시</span></label>
+                            </div>
+                        </div>
+                        <p class="create_condition">8자 이상, 20자 이하로 설정해주세요.</p>
+                    </li>
+                    <li>
+                        <div class="separation">
+                            <p>아이디/비밀번호를 찾을 때 이메일로 정보가 전송됩니다.</p>
+                            <div id="email_inputfield" class="input_container">
+                                <label class="floating" for="email">이메일 주소</label>
+                                <input class="field" type="email" name="email" id="email" value="" required
+                                    maxlength="20">
+                            </div>
+                            <!-- <p>예시) cs@snclab.kr</p> -->
+                        </div>
+                    </li>
+                </ul>
+                <input type="submit" class="prime_btn" value="다음으로" disabled="disabled">
+            </form>
+        </div>
+    </div>
+    <!-- layer_container E -->
+</body>
+
+</html>
+
+<head>

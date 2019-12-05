@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="파킹플레이는 IoT 주차 센서를 이용한 실시간 주차 정보 제공 및 예약 플랫폼입니다.">
+    <meta name="author" content="(주)에스앤씨랩">
+    <meta property="og:title" content="(주)에스앤씨랩">
+    <meta property="og:description" content="파킹플레이는 IoT 주차 센서를 이용한 실시간 주차 정보 제공 및 예약 플랫폼입니다.">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, width=device-width">
+    <!-- <meta name="format-detection" content="telephone=no"> -->
+    <meta name="HandheldFriendly" content="true">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <!-- <meta name="msapplication-TileImage" content="/img/favicon/ms-icon-144x144.png"> -->
+    <!-- <link rel="manifest" href="/img/favicon/manifest.json"> -->
+    <link rel="canonical" href="https://www.parkingplay.kr/">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/ui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700" rel="stylesheet">
+    <!-- <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script> -->
+    <title>약관동의 | 파킹플레이</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div>
+            <button class="cancel_btn"><span class="hidden">회원가입 취소</span></button>
+        </div>
+        <div class="stepper">
+            <p class="hidden">회원가입 단계</p>
+            <ul>
+                <li>
+                    <div class="active_index_container">
+                        <div class="center active_index">1<span class="hidden">단계</span></div>
+                    </div>
+                    <div class="step_name">약관동의</div>
+                </li>
+                <li>
+                    <div>
+                        <div class="center">2<span class="hidden">단계</span></div>
+                    </div>
+                    <div class="step_name">정보입력</div>
+                </li>
+                <li>
+                    <div>
+                        <div class="center">3<span class="hidden">단계</span></div>
+                    </div>
+                    <div class="step_name">휴대 전화 인증</div>
+                </li>
+                <li>
+                    <div>
+                        <div class="center">4<span class="hidden">단계</span></div>
+                    </div>
+                    <div class="step_name">가입완료</div>
+                </li>
+            </ul>
+        </div>
+        <div class="header">
+            <h1 class="hidden">회원가입</h1>
+            <h2>약관동의</h2>
+            <p class="step_des">파킹플레이 서비스 이용약관에 동의해주세요.</p>
+        </div>
+        <div class="form_container">
+            <form action="m_signup_account.html" method="post" name="terms_form" target="#">
+                <input class="hidden" type="checkbox" name="ck_all" id="ck_all" value="true" checked>
+                <label class="checkbox" for="ck_all">모든 이용약관에 동의합니다</label>
+                <ul class="separation">
+                    <li>
+                        <input class="hidden" type="checkbox" name="ck_service" id="ck_service" value="true" checked
+                            required>
+                        <label class="checkbox required" for="ck_service">(필수) 서비스 이용 약관</label>
+                        <a href="#" title="서비스 이용 약관" class="chip">상세보기</a>
+                    </li>
+                    <li>
+                        <input class="hidden" type="checkbox" name="ck_privacy" id="ck_privacy" value="true" checked
+                            required>
+                        <label class="checkbox required" for="ck_privacy">(필수) 개인 정보 취급 방침</label>
+                        <a href="#" title="개인 정보 취급 방침" class="chip">상세보기</a>
+                    </li>
+                    <li>
+                        <input class="hidden" type="checkbox" name="ck_location" id="ck_location" value="true" checked
+                            required>
+                        <label class="checkbox required" for="ck_location">(필수) 위치 정보 수집 동의</label>
+                        <a href="#" title="위치 정보 수집 동의" class="chip">상세보기</a>
+                    </li>
+                </ul>
+                <input type="submit" class="prime_btn" value="다음으로">
+            </form>
+        </div>
+    </div>
+    <!-- layer_container E -->
+</body>
+
+</html>
+
+<head>
