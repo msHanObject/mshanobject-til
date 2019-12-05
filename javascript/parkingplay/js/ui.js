@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     addEventFunc(inputField, 'focusout', checkInputFieldValid);
 
     var checkAll = document.querySelector("label[for=ck_all]");
-    addEventFunc(checkAll, 'click', checkAllRequired);
+    addEventFunc(checkAll, 'click', checkAllHandler);
     
 
 });
@@ -28,13 +28,32 @@ function addEventFunc(element, eventName, myFunc) {
     }
 }
 
-function checkAllRequired() {
-    var allCheckboxRequired = document.querySelectorAll('label[class=checkbox]');
-    console.log(allCheckboxRequired);
+function checkAllHandler() {
+	var checkAllBox = document.getElementById('ck_all');
+	
+	if (checkAllBox.checked != true) {
+		checkOnAllRequired();
+	} else {
+		checkOffAllRequired();
+	}
+}
+
+function checkOnAllRequired() {
+    var allCheckboxRequired = document.querySelectorAll('input[type=checkbox][required]');
     for(var i=0; i<allCheckboxRequired.length; i++){
-        console.log(allCheckboxRequired[i]);
+		if(allCheckboxRequired[i].checked != true){
+			allCheckboxRequired[i].checked = true;
+		}
     }
-    
+}
+
+function checkOffAllRequired() {
+    var allCheckboxRequired = document.querySelectorAll('input[type=checkbox][required]');
+    for(var i=0; i<allCheckboxRequired.length; i++){
+		if(allCheckboxRequired[i].checked != false){
+			allCheckboxRequired[i].checked = false;
+		}
+    }
 }
 
 function showPassword() {
