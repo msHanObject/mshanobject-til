@@ -25,7 +25,7 @@ section > p.section_title{font-size: 16px; color: #555555; letter-spacing: -0.8p
 .social_group > ul > li:nth-child(4){background-color: #00c73c;}
 .social_group> ul > li:nth-child(n+2){margin-left: 20px;}
 .social_group> ul > li > a{color: transparent;}
-.logoset{display: block; width: 55px; height: 55px; background: url(/img/imgset_55px.png) no-repeat 0 0/220px 55px;}
+.logoset{display: block; width: 55px; height: 55px; background: url(../img../imgset_55px.png) no-repeat 0 0/220px 55px;}
 .kakao{background-position-x: 0;}
 .google{background-position-x: -55px;}
 .facebook{background-position-x: -110px;}
@@ -47,7 +47,7 @@ input[type="checkbox"] + label{-webkit-user-select: none; -moz-user-select: none
 input[type="checkbox"] + label.checkbox:before{content: ""; display: inline-block; width:22.5px; height:22.5px; line-height: 22.5px; margin: -2px 8px 0 0; text-align: center; vertical-align: middle; border: 1px solid #000000; border-radius: 3px; background-color: #ffffff;}
 input[type="checkbox"] + label.checkbox:focus{outline: -webkit-focus-ring-color auto 1px;}
 input[type="checkbox"]:checked + label.checkbox:before{content: "\2714"; color: #3b86ff; border-color: #3b86ff;}
-.cancel_btn{width: 15px; height: 15px; color: transparent; background: url(/img/cancel_btn.png) no-repeat 0 0/15px 15px;}
+.cancel_btn{width: 15px; height: 15px; color: transparent; background: url(../img/cancel_btn.png) no-repeat 0 0/15px 15px;}
 .chip{padding: 5px; border: 1px solid #bcbcbc; border-radius: 12px; font-size: 13px; line-height: 13px; letter-spacing: -0.65px; color: #747474;}
 .form_container > form > ul > li p{margin: 10px 0; font-size: 14px; letter-spacing: -0.7px; color: #636366;}
 .wrap{padding: 0 20px 20px;}
@@ -59,8 +59,8 @@ input[type="checkbox"]:checked + label.checkbox:before{content: "\2714"; color: 
 .form_container > form > ul > li:nth-child(n+2){margin-top: 10px;}
 #pw_inputfield .pw_check_container{position: absolute; top: 50%; right: 15px; transform: translate(0, -50%);}
 .pw_check_container .pw_check{color: #747474; position: relative;}
-.pw_check > span{position: absolute; transform: translate(-50%, -50%); top: 50%; right: 100%; width: 21px; height: 14px; background: url(/img/showpw.png) no-repeat 0 0/21px 14px; text-indent: -9999px;}
-.pw_check[data-button-type="hide_password"] > span:after{content: ""; position: absolute; top: 0px; right: 2px; width: 15.5px; height: 17px; background: url(/img/hidepw.png) no-repeat 0 0/15.5px 17px;}
+.pw_check > span{position: absolute; transform: translate(-50%, -50%); top: 50%; right: 100%; width: 21px; height: 14px; background: url(../img/showpw.png) no-repeat 0 0/21px 14px; text-indent: -9999px;}
+.pw_check[data-button-type="hide_password"] > span:after{content: ""; position: absolute; top: 0px; right: 2px; width: 15.5px; height: 17px; background: url(../img/hidepw.png) no-repeat 0 0/15.5px 17px;}
 .membership_support{font-size: 14px; letter-spacing: -0.7px;}
 .membership_support > ul > li:nth-child(n+2){margin-top: 20px;}
 .membership_support p{display: inline; color: #636366;}
@@ -68,7 +68,7 @@ input[type="checkbox"]:checked + label.checkbox:before{content: "\2714"; color: 
 .membership_support{margin-bottom: 80px;}
 .stepper{width: max-content; margin: 0 auto;}
 .stepper > ul{position: relative;}
-.stepper > ul:after{content: ""; width: calc(100% - 14px); height: 1px; position: absolute; top: 13.5px; left: 7px; background: url(/img/stepper_bar_unit.png) repeat-x 0 0/23px 1px; z-index: -1;}
+.stepper > ul:after{content: ""; width: calc(100% - 14px); height: 1px; position: absolute; top: 13.5px; left: 7px; background: url(../img/stepper_bar_unit.png) repeat-x 0 0/23px 1px; z-index: -1;}
 .stepper > ul > li{display: inline-block; width: max-content; vertical-align: middle; position: relative;}
 .stepper > ul > li:not(:last-child){margin-right: 20px;}
 .stepper > ul > li > div{text-align: center;}

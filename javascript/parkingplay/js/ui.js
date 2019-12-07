@@ -7,53 +7,66 @@ document.addEventListener("DOMContentLoaded", function () {
     addEventFunc(inputField, 'keyup', checkInputFieldValid);
     addEventFunc(inputField, 'focusout', checkInputFieldValid);
 
-    var checkAll = document.querySelector("label[for=ck_all]");
-    addEventFunc(checkAll, 'click', checkAllHandler);
+    var checkAllInput = document.getElementById('ck_all');
+    var requiredCheckboxes = document.querySelectorAll('input[type=checkbox][required]');
     
+    var numberOfCheckedRequiredCheckboxes = countCheckedboxes(requiredCheckboxes);
+    addEventFunc(requiredCheckboxes, 'click', function() {
+        if (event.target.checked === false) {
+            checkAllInput.checked = false;
+            numberOfCheckedRequiredCheckboxes--;
+        } else {
+            numberOfCheckedRequiredCheckboxes++;
+        }
+        if (numberOfCheckedRequiredCheckboxes == requiredCheckboxes.length) {
+            checkAllInput.checked = true;
+        }
+    });
+
+    addEventFunc(checkAllInput, 'change', function () {
+        if (event.target.checked != true) {
+            checkAll(requiredCheckboxes, false);
+            numberOfCheckedRequiredCheckboxes = 0;
+        } else {
+            checkAll(requiredCheckboxes, true);
+            numberOfCheckedRequiredCheckboxes = requiredCheckboxes.length;
+        }
+    });
 
 });
 
+function countCheckedboxes(checkboxes) {
+    var counts = 0;
+    checkboxes.forEach(function (checkbox) {
+        if (checkbox.checked == true) {
+            counts++;
+        }
+    });
+    return counts;
+}
+
 function addEventFunc(element, eventName, myFunc) {
-    if (element == null || element == undefined || element.length == 0) {
+    var elementLength = element.length;
+    if (element == null || element == undefined || elementLength == 0) {
         return;
     }
     
-    if (element.length == undefined) {
+    if (elementLength == undefined) {
         element.addEventListener(eventName, myFunc);
         return;
     }
 
-    for (var i=0; i < element.length; i++) {
+    for (var i=0; i < elementLength; i++) {
         element[i].addEventListener(eventName, myFunc);
     }
 }
 
-function checkAllHandler() {
-	var checkAllBox = document.getElementById('ck_all');
-	
-	if (checkAllBox.checked != true) {
-		checkOnAllRequired();
-	} else {
-		checkOffAllRequired();
-	}
-}
-
-function checkOnAllRequired() {
-    var allCheckboxRequired = document.querySelectorAll('input[type=checkbox][required]');
-    for(var i=0; i<allCheckboxRequired.length; i++){
-		if(allCheckboxRequired[i].checked != true){
-			allCheckboxRequired[i].checked = true;
-		}
-    }
-}
-
-function checkOffAllRequired() {
-    var allCheckboxRequired = document.querySelectorAll('input[type=checkbox][required]');
-    for(var i=0; i<allCheckboxRequired.length; i++){
-		if(allCheckboxRequired[i].checked != false){
-			allCheckboxRequired[i].checked = false;
-		}
-    }
+function checkAll(checkboxes, truefalse) {
+    checkboxes.forEach(function(checkbox){
+        if (checkbox.checked != truefalse) {
+            checkbox.checked = truefalse;
+        }
+    });
 }
 
 function showPassword() {
