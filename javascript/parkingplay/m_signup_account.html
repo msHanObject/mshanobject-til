@@ -66,43 +66,40 @@
                 <ul>
                     <li>
                         <div id="create_id_inputfield" class="input_container">
+                            <input class="field" type="text" name="create_id" id="create_id" value="" required
+                            maxlength="20">
                             <label class="floating" for="create_id">아이디</label>
-                            <input class="field" type="text" name="create_id" id="create_id" value="" required maxlength="20">
                         </div>
-                        <p class="create_condition">영어, 숫자만 사용할 수 있습니다.</p>
                     </li>
                     <li>
                         <div id="create_pw_inputfield" class="input_container">
-                            <label class="floating" for="create_pw">비밀번호</label>
                             <input class="field" type="password" name="create_pw" id="create_pw" value="" required
-                                maxlength="20">
+                            maxlength="20">
+                            <label class="floating" for="create_pw">비밀번호</label>
                             <div class="pw_check_container">
-                                <input class="hidden" type="checkbox" name="create_pw_check" id="create_pw_check"
-                                    value="false">
-                                <label for="create_pw_check">비밀번호 <span>표시</span></label>
+                                <button type="button" class="pw_check"
+                                    data-button-type="show_password"><span>비밀번호</span> 표시</button>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div id="confirm_pw_inputfield" class="input_container">
-                            <label class="floating" for="confirm_pw">비밀번호 재입력</label>
                             <input class="field" type="password" name="confirm_pw" id="confirm_pw" value="" required
                                 maxlength="20">
+                            <label class="floating" for="confirm_pw">비밀번호 재입력</label>
                             <div class="pw_check_container">
-                                <input class="hidden" type="checkbox" name="confirm_pw_check" id="confirm_pw_check"
-                                    value="false">
-                                <label for="confirm_pw_check">비밀번호 <span>표시</span></label>
+                                <button type="button" class="pw_check"
+                                    data-button-type="show_password"><span>비밀번호</span> 표시</button>
                             </div>
                         </div>
-                        <p class="create_condition">8자 이상, 20자 이하로 설정해주세요.</p>
                     </li>
                     <li>
                         <div class="separation">
                             <p>아이디/비밀번호를 찾을 때 이메일로 정보가 전송됩니다.</p>
                             <div id="email_inputfield" class="input_container">
-                                <label class="floating" for="email">이메일 주소</label>
                                 <input class="field" type="email" name="email" id="email" value="" required
-                                    maxlength="20">
+                                maxlength="20">
+                                <label class="floating" for="email">이메일 주소</label>
                             </div>
                             <!-- <p>예시) cs@snclab.kr</p> -->
                         </div>
