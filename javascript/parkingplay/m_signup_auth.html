@@ -66,30 +66,37 @@
                 <ul>
                     <li>
                         <div id="phone_num_inputfield" class="input_container">
+                            <input class="field" type="tel" name="phone_num" id="phone_num" value="" required maxlength="20">
                             <label class="floating" for="phone_num">휴대 전화 번호</label>
-                            <input type="tel" name="phone_num" id="phone_num" value="" required maxlength="20">
                         </div>
-                        <!-- <p>예시) 01012345678</p> -->
                     </li>
                     <li>
-                        <div id="auth_num_inputfield" class="input_container">
+                        <div id="auth_num_inputfield" class="input_container" style="display: none;">
+                            <input class="field" type="tel" name="auth_num" id="auth_num" value="" required maxlength="20">
                             <label class="floating" for="auth_num">인증번호</label>
-                            <input type="tel" name="auth_num" id="auth_num" value="" required maxlength="20">
                             <div class="countdown">
-                                <span>4:29</span>
+                                <span id="auth_minute"></span><span id="auth_second"></span>
                             </div>
                         </div>
                     </li>
                 </ul>
-                <input type="submit" class="prime_btn" value="인증 완료" disabled="disabled">
+                <div class="membership_support">
+                    <ul>
+                        <li>
+                            <p>인증번호를 받지 못하셨나요?</p>
+                            <button type="button">인증번호 다시 받기</button>
+                        </li>
+                        <li>
+                            <p>휴대전화 번호를 잘못 입력하셨나요?</p>
+                            <button type="button">휴대전화 번호 다시 입력하기</button>
+                        </li>
+                    </ul>
+                </div>
+                <input type="submit" class="prime_btn" data-button-type="send_auth_num" value="인증번호 보내기" disabled="disabled">
             </form>
-            <div class="membership_support">
-                <p>인증번호를 받지 못하셨나요?</p>
-                <a href="#">인증번호 다시 받기</a>
-            </div>
+            
         </div>
     </div>
-    <!-- layer_container E -->
 </body>
 
 </html>
