@@ -1,3 +1,0 @@
-p[name^="bacon"]{color:blue;}
-p[name$="bacon"]{color:red;}
-p[name*="bacon"]{color:green;}
