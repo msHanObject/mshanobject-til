@@ -42,7 +42,7 @@ class MyCrawler extends PHPCrawler
 
 $crawler = new MyCrawler();
 
-define('URL', 'kincoa.or.kr');
+define('URL', 'https://www.tistory.com');
 $crawler->setURL(URL);
 
 //$post_data = array('id' => 'test_id', 'pw' => '12123', 'submit' => 'submit');

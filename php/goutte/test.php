@@ -1,51 +1,43 @@
-<?php
-require __DIR__.'/vendor/autoload.php';
+<?php require __DIR__.'/vendor/autoload.php';
 use Goutte\Client;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\DomCrawler\Crawler;
 
 $client = new Client();
+define('URL', 'https://www.tistory.com');
+define('FORM_URL', 'https://www.github.com');
 
-// Go to the symfony.com website
-$crawler = $client->request('GET', 'https://www.tistory.com');
+// Go to the defined 'URL'
+$crawler = $client->request('GET', URL);
 
-// Click on the "Security Advisories" link
-$link = $crawler->selectLink('스토리')->link();
-$crawler = $client->click($link);
+print_node_text($crawler, '.list_gnb');
+// Get target from filter
+// $target is expression of css selector
+// Get each text of node from filter()
+function print_node_text($crawler, $css_selector)
+{
+	$crawler->filter($css_selector)->each(function ($node) {
+		print_r($node);//."\n";
+	});
+}
 
-// Get the latest post in this category and display the titles
-print_r($crawler->filter('ul')->each(function ($node) {
-    print $node->text()."\n";
-}));
 
 // Define id and password of Login Form
 //define('ID', 'mshanobject');
 //define('PW', 'h6973125048');
 
-//$node = 'div.mt-5 > div > ul > li > div > a > span';
-//submit_form($client, $node);
-
 // Click on links:
-function click_link($crawler, $client)
+function click_link($crawler, $target_text)
 {
-	// Click on the "Security Advisories" link
-	$link = $crawler->selectLink('Security Advisories')->link();
-	$crawler = $client->click($link);
-}
-
-// Extract data:
-function extract_data($crawler, $node)
-{
-	// Get the latest post in this category and display the titles
-	$crawler->filter('h2 > a')->each(function ($node) {
-	    print $node->text()."\n";
-	});
+	$link = $crawler->selectLink($target_text)->link();
+	$new_crawler = $client->click($link);
+	return $new_crawler;
 }
 
 // Submit forms:
-function submit_form($client, $node)
+function submit_form($client)
 {
-	$crawler = $client->request('GET', 'https://github.com/');
+	$crawler = $client->request('GET', FORM_URL);
 	$crawler = $client->click($crawler->selectLink('Sign in')->link());
 	$form = $crawler->selectButton('Sign in')->form();
 	$crawler = $client->submit($form, array('login' => ID, 'password' => PW));
