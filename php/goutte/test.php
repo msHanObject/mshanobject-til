@@ -71,7 +71,13 @@ foreach ($first_uris as $k => $v) {
 */
 
 // Case 6: scape links of URI unquestioningly
-$link_arr = get_uris(TISTORY)[0];
+define('FIXED_LINKS', 'http://snchmsobj.sncl.kr');
+//$link_arr = get_uris(TISTORY)[0];
+$link_arr = get_uris(FIXED_LINKS)[0];
+
+$file_path = './links.txt';
+$fh = fopen($file_path, 'ab+');
+
 foreach ($link_arr as $v) {
 	$crawler = $client->request('GET', $v);
 	$new_links = array();
@@ -81,12 +87,18 @@ foreach ($link_arr as $v) {
 	foreach($new_links[0] as $a) {
 		if (!in_array($a, $link_arr)) {
 			$link_arr[] = $a;
+			fwrite($fh, $a."\n");
 		}
 	}
 }
+fclose($fh);
 echo 'unique count: '.count(array_unique($link_arr))."\n";
 echo 'normal count: '.count($link_arr)."\n";
 //file_put_contents("tistory_links.json", json_encode($link_arr));
 
-// Case 7: scape links under the domain
+
+// Case 7: set proxy
+//$client = new Client(HttpClient::create(['proxy' => 'http://xx.xx.xx.xx:80']));
+
+// Case 8: scape links under the domain
 
