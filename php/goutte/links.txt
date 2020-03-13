@@ -1,3 +1,0 @@
-https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php
-http://www.nextree.co.kr/p4327/
-http://snchmsobj.sncl.kr/test/login.html
