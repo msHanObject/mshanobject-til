@@ -4,12 +4,36 @@ use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\DomCrawler\Crawler;
 
 $client = new Client();
-define('TISTORY', 'https://www.tistory.com');
-define('REDDIT', 'https://www.reddit.com/');
-define('GITHUB', 'https://www.github.com');
+define('FILE_PATH', './link.json');
 
-// Go to the defined 'URL'
-$crawler = $client->request('GET', TISTORY);
+// crawlering loop test
+function travers()
+{
+	$depth = 1;
+	$links = get_uris('https://www.knicc.re.kr');
+	foreach($links as $link)
+	{
+		save_file(FILE_PATH, $link);
+		$next_link = get_uris($link);
+		if (!empty($next_link)) {
+			$depth++;
+			$unique_links = array_keys(array_flip($links)+array_flip($next_link));
+			file_put_contents(FILE_PATH, json_encode($unique_links));
+		}
+	}
+}
+
+// login test
+function() get_login_user_name()
+{
+	$crawler = $client->request('GET', 'https://www.knicc.re.kr/login_form.php');
+	$form = $crawler->selectButton('로그인')->form();
+	$crawler = $client->submit($form, array('id' => 'tester1', 'password' => '111111'));
+	$crawler = $client->request('GET', 'https://www.knicc.re.kr');
+	$crawler->filter('.welcome')->each(function ($node) {
+		print $node->text()."\n";
+	});
+}
 
 function get_linebreak() {
 	if (PHP_SAPI == "cli") {
@@ -20,59 +44,65 @@ function get_linebreak() {
 	return $lb;
 }
 
-function url_exist($url){//se passar a URL existe
-    $c=curl_init();
-    curl_setopt($c,CURLOPT_URL,$url);
-    curl_setopt($c,CURLOPT_HEADER,1);//get the header
-    curl_setopt($c,CURLOPT_NOBODY,1);//and *only* get the header
-    curl_setopt($c,CURLOPT_RETURNTRANSFER,1);//get the response as a string from curl_exec(), rather than echoing it
-    curl_setopt($c,CURLOPT_FRESH_CONNECT,1);//don't use a cached version of the url
-    if(!curl_exec($c)){
-        //echo $url.' inexists';
-        return false;
-    }else{
-        //echo $url.' exists';
-        return true;
-    }
-    //$httpcode=curl_getinfo($c,CURLINFO_HTTP_CODE);
-    //return ($httpcode<400);
+function show_dead_links()
+{
+	foreach($dead_links as $link) {
+		echo 'Dead link: '.$link;
+	}
+}
+
+function url_exist($url) {
+	$ch = curl_init();//$ch is curl_handler
+	curl_setopt($ch, CURLOPT_URL,$url);
+	curl_setopt($ch, CURLOPT_HEADER,1);//get the header
+	curl_setopt($ch, CURLOPT_NOBODY,1);//and *only* get the header
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);//get the response as a string from curl_exec(), rather than echoing it
+	curl_setopt($ch, CURLOPT_FRESH_CONNECT,1);//don't use a cached version of the url
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: close'));
+	curl_exec($ch);
+	$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);//for checking http status
+	curl_close($ch);
+
+	return $http_code < 400;
 }
 
 function get_uris($url)
 {
 	$client = new Client();
 	if (!url_exist($url)) {
+		$dead_links[] = $url;
+		echo 'Dead link: '.$url;
 		return;
 	}
-	echo 'Base URL: '.$url.PHP_EOL;
 	$crawler = $client->request('GET', $url);
 	$links = $crawler->filter('a')->each(function ($node) {
 		$link = $node->link()->getUri();
 		if (empty($link)) {
 			return;
 		}
-		if (url_exist($link)) {
-//			echo 'Child URL: '.$link.PHP_EOL;
-			return $link;
-		}
+		return $link;
 	});
 	if (empty($links)) {
 		return;
 	}
-	$unique_links = deduplicate($links);
 
-	return $unique_links;
+	return exclude_base_url($links);
 }
 
-function deduplicate($arr)
+function exclude_base_url($array)
 {
-	$unique_arr = array();
-	foreach($arr as $val) {
-		if (!in_array($val, $unique_arr)) {
-			$unique_arr[] = $val;
+	$new_array = array();
+	foreach($array as $val) {
+		if (preg_match('/^(http)?s?(:\/\/)?(www\.)?knicc\.re\.kr\/?#?$/', $val) == 1) {
+			continue;
+		}
+		if (!in_array($val, $new_array)) {
+			$new_array[] = $val;
+			echo $val;
 		}
 	}
-	return $unique_arr;
+
+	return $new_array;
 }
 
 function save_file($file_name, $str)
@@ -81,16 +111,13 @@ function save_file($file_name, $str)
 		return;
 	}
 	$fh = get_file_handler($file_name);
-	fwrite($fh, $str."\n");
+	fwrite($fh, $str);
 	fclose($fh);
 }
 
-function get_file_handler($file_name = 'tmp')
+function get_file_handler($file_name = './tmp.txt')
 {
-	$file_extention = '.txt';
-	$file_name .= $file_extention;
-	$file_handler = fopen($file_name, 'ab+');
-	return $file_handler;
+	return fopen($file_name, 'ab+');
 }
 
 function get_urn($url)
@@ -102,7 +129,6 @@ function get_urn($url)
 // Case 1: get URI of first target node
 /*
 $css_selector = 'a';
-$node_position = 49;
 $things_to_scrape = array('_name', 'href', '_text', 'src', 'class');
 $link_crawler = $crawler->filter($css_selector);
 $link = $link_crawler->link();
@@ -112,6 +138,7 @@ print_r($uri);
 
 // Case 2: extract things from node of position
 /*
+$node_position = 49;
 $output = $crawler
     ->filter($css_selector) // CSS selector
     ->eq($node_position) // Access node by its position on the list
@@ -181,6 +208,7 @@ file_put_contents("depth2_links.json", json_encode($link_arr));
 //$client = new Client(HttpClient::create(['proxy' => 'http://xx.xx.xx.xx:80']));
 
 // Case 8: save links of naver
+/*
 define('NAVER_URL', 'https://naver.com');
 define('NAVER1', 'naver-1');
 $depth_1_links = get_uris(NAVER_URL);
@@ -198,3 +226,4 @@ foreach($depth_2_links as $link)
 {
 	save_file(NAVER2, $link);
 }
+*/
