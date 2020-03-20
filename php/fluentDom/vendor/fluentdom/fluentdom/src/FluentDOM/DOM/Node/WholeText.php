@@ -1,0 +1,115 @@
+<?php
+/**
+ * FluentDOM
+ *
+ * @link https://thomas.weinert.info/FluentDOM/
+ * @copyright Copyright 2009-2019 FluentDOM Contributors
+ * @license http://www.opensource.org/licenses/mit-license.php The MIT License
+ *
+ */
+declare(strict_types=1);
+
+namespace FluentDOM\DOM\Node {
+
+  use FluentDOM\DOM\Document;
+
+  // @codeCoverageIgnoreStart
+  if (!\defined('LIBXML_NO_MODIFICATION_ALLOWED_ERR')) {
+      \define('LIBXML_NO_MODIFICATION_ALLOWED_ERR', 7);
+  }
+  // @codeCoverageIgnoreEnd
+
+  /**
+   * Add the `replaceWholeText()` method. To the text node classes.
+   *
+   * https://www.w3.org/TR/DOM-Level-3-Core/core.html#Text3-replaceWholeText
+   *
+   * @property Document $ownerDocument
+   * @property \DOMNode $previousSibling
+   * @property \DOMNode $nextSibling
+   * @property \DOMNode $parentNode
+   */
+  trait WholeText
+  {
+
+    /**
+     * @param string $content
+     * @return $this|NULL
+     */
+      public function replaceWholeText($content)
+      {
+          /** @var \FluentDOM\DOM\Text|\FluentDOM\DOM\CdataSection $this */
+          $content = (string)$content;
+          $canReplaceEntity = function (\DOMEntityReference $reference) use (&$canReplaceEntity) {
+              foreach ($reference->firstChild->childNodes as $childNode) {
+                  $canReplace = false;
+                  if ($childNode instanceof \DOMEntityReference) {
+                      $canReplace = $canReplaceEntity($childNode);
+                  } elseif (
+            $childNode instanceof \DOMCharacterData
+          ) {
+                      $canReplace = true;
+                  }
+                  if (!$canReplace) {
+                      return false;
+                  }
+              }
+              return true;
+          };
+          $replaceNode = function (\DOMNode $node = null) use ($canReplaceEntity) {
+              if (
+          $node instanceof \DOMNode &&
+          !(
+              $node instanceof \DOMElement ||
+            $node instanceof \DOMComment ||
+            $node instanceof \DOMProcessingInstruction
+          ) &&
+          $node->parentNode instanceof \DOMNode
+        ) {
+                  if (
+            $node instanceof \DOMEntityReference &&
+            !$canReplaceEntity($node)
+          ) {
+                      throw new \DOMException(
+                'Libxml: no modification allowed.',
+                LIBXML_NO_MODIFICATION_ALLOWED_ERR
+            );
+                  }
+                  return true;
+              }
+              return false;
+          };
+          $fragment = $this->ownerDocument->createDocumentFragment();
+          $iterate = function ($start, \Closure $getNext) use ($fragment, $replaceNode) {
+              if ($parent = $this->parentNode) {
+                  /** @noinspection PhpParamsInspection */
+                  $current = $getNext($start);
+                  while (($current instanceof \DOMNode) && $replaceNode($current)) {
+                      if ($current instanceof \DOMEntityReference) {
+                          $fragment->appendChild($current);
+                      } else {
+                          $parent->removeChild($current);
+                      }
+                      /** @noinspection PhpParamsInspection */
+                      $current = $getNext($start);
+                  }
+              }
+          };
+          $iterate($this, function (\DOMNode $node) {
+              return $node->previousSibling;
+          });
+          $iterate($this, function (\DOMNode $node) {
+              return $node->nextSibling;
+          });
+          if ($content === '') {
+              if ($this instanceof  \DOMNode && $this->parentNode instanceof \DOMNode) {
+                  $this->parentNode->removeChild($this);
+              }
+              $this->textContent = '';
+              return null;
+          }
+          $this->textContent = $content;
+          return $this;
+      }
+  }
+}
