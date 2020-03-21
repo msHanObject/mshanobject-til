@@ -143,7 +143,7 @@ class Client implements ClientInterface
 	 *
 	 * @return Promise\PromiseInterface
 	 */
-	public function requestAsync($method, $uri = '', array $options = []
+	public function requestAsync($method, $uri = '', array $options = [])
 	{
 		$options = $this->prepareDefaults($options);
 		// Remove request modifying paramter because it can be donee up-front.
@@ -214,7 +214,7 @@ class Client implements ClientInterface
 			$uri = Psr7\UriResolver::resolve(Psr7\uri_for($config['base_uri']), $uri);
 		}
 
-		if (isset($config['idn_conversion']) && ($config(['idn_conversion'] !== false)) {
+		if (isset($config['idn_conversion']) && ($config['idn_conversion'] !== false)) {
 			$idnOptions = ($config['idn_conversion'] === true) ? IDNA_DEFAULT : $config['idn_conversion'];
 			$uri = _idn_uri_convert($uri, $idnOptions);
 		}
@@ -239,7 +239,7 @@ class Client implements ClientInterface
 			];
 
 			// idn_to_ascii() is a part of ext-intl and might be not available
-			$defaults['idn_conversion'] function_exists('idn_to_ascii')
+			$defaults['idn_conversion'] = function_exists('idn_to_ascii')
 				// Old ICU versions don't have this constant, so we are basically stuck (see https://github.com/guzzle/guzzle/pull/2424
 				// and https://github.ocm./guzzle/guzzle/issues/2248 for details)
 				&& (
@@ -410,7 +410,7 @@ class Client implements ClientInterface
 			$options['_conditional']['Content-Type'] = 'application/json';
 		}
 
-		if (!empty($options['decode_content']))
+		if (!empty($options['decode_content'])
 			&& $options['decode_content'] !== true
 		) {
 			// Ensure that we don't have the header in different case and set the new value.
@@ -470,4 +470,41 @@ class Client implements ClientInterface
 
 		$request = Psr7\modify_request($request,  $modify);
 		if ($request->getBody() instanceof Psr7\MultipartStream) {
-			// Use a multipart/form-data 
+			// Use a multipart/form-data POST if a Content-Type is not set.
+			// Ensure that we don't have the header in different case and set the new value.
+			$options['_conditinoal'] = Psr7\_caseless_remove(['Content-Type'], $options['_conditional']);
+			$options['_conditional']['Content-Type'] = 'multipart/form-data; boundary='
+				. $request->getBody()->getBoundary();
+		}
+
+		// Merge in conditional headers if they are not present.
+		if (isset($options['_conditional'])) {
+			// Build up the changes so it's in a single clone of the message.
+			$modify = [];
+			foreach ($options['_conditional'] as $k => $v) {
+				if (!$request->hasHeader($k)) {
+					$modify['set_headers'][$k] = $v;
+				}
+			}
+			$request = Psr7\modify_request($request, $modify);
+			// Don't pass this internal value along to middleware/handlers.
+			unset($options['_conditional']);
+		}
+
+		return $request;
+	}
+	
+	/**
+	 * Throw Exception with pre-set message.
+	 * @return void
+	 * @throws InvalidArgumentException Invalid body.
+	 */
+	private function invalidBody()
+	{
+		throw new \InvalidArgumentException('Passing in the "body" request'
+			. 'option as an array to send a POST request has been deprecated. '
+			. 'Please use the "form_params" request option to send a '
+			. 'application/x-www-form-urlencoded request, or the "multipart" '
+			. 'request option to send a multipart/form-data request.');
+	}
+}
