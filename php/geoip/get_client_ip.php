@@ -1,5 +1,5 @@
 <?php
-echo get_client_ip_env();
+print_r(get_client_ip_env());
 
 // Function to get the client ip address
 function get_client_ip_env()
