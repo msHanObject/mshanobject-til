@@ -1,6 +1,6 @@
 <?php
 $title = 'Example for PHP Simple HTML DOM Parser';
-include_once '/var/www/html/header.html';
+//include_once '/var/www/html/header.html';
 include_once '/var/www/simple_html_dom_1_9_1/simple_html_dom.php';
 
 echo "<h1>$title</h1>";
@@ -196,11 +196,15 @@ echo '
 	<code>$es = $html->find(\'[class*=b]\');</code>
 </pre>';
 
-# Find all text blocks
-//$es = $html->find('text');
-//foreach ($es as $e) {
-//    echo $e->outertext;
-//}
+echo '
+<h3># 모든 text 블럭들을 찾아서 배열로 리턴받기</h3>
+<pre>
+	<code>$es = $html->find(\'text\');</code>
+</pre>';
+$es = $html->find('text');
+foreach ($es as $e) {
+    echo $e->outertext;
+}
 
 # Find all comment blocks
 //$es = $html->find('comment');

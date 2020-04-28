@@ -5,6 +5,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 $client = new Client();
 define('FILE_PATH', './link.json');
+travel();
 
 // crawlering loop test
 function travel()

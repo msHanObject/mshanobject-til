@@ -1,5 +1,7 @@
 {
 	"require" : {
-		"fluentdom/fluentdom" : "7.4.0"
+		"fluentdom/fluentdom" : "7.4.0",
+		"fluentdom/selectors-phpcss": "^1.2",
+		"fluentdom/selectors-symfony": "^3.1"
 	}
 }

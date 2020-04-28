@@ -609,7 +609,7 @@ class Crawler implements \Countable, \IteratorAggregate
                 return (string) func_get_arg(0);
             }
 
-            throw new \InvalidArgumentException('The current node list is empty.');
+//            throw new \InvalidArgumentException('The current node list is empty.');
         }
 
         $text = $this->getNode(0)->nodeValue;

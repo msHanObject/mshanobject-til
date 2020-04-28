@@ -1,8 +1,7 @@
 <?php
 
 use Symfony\Component\EventDispatcher\Event;
-//use VDB\Spider\Discoverer\XPathExpressionDiscoverer;
-use VDB\Spider\Discoverer\CssSelectorDiscoverer;
+use VDB\Spider\Discoverer\XPathExpressionDiscoverer;
 use VDB\Spider\Event\SpiderEvents;
 use VDB\Spider\EventListener\PolitenessPolicyListener;
 use VDB\Spider\Filter\Prefetch\AllowedHostsFilter;
@@ -15,19 +14,19 @@ use VDB\Spider\StatsHandler;
 use Example\LogHandler;
 use GuzzleHttp\Middleware;
 
+
 require_once('example_complex_bootstrap.php');
 
 // The URI we want to start crawling with
-//$seed = 'https://knicc.re.kr';
-//$seed = 'knicc.re.kr';
-$seed = 'naver.com';
+//$seed = 'http://dmoztools.net/Computers/Internet/';
+$seed = 'https://doc.rust-lang.org/book/';
 
 // We want to allow all subdomains of dmoz.org
 $allowSubDomains = true;
 
 // Create spider
 $spider = new Spider($seed);
-$spider->getDownloader()->setDownloadLimit(10);
+$spider->getDownloader()->setDownloadLimit(30);
 
 $statsHandler = new StatsHandler();
 $LogHandler = new LogHandler();
@@ -38,8 +37,7 @@ $queueManager->getDispatcher()->addSubscriber($statsHandler);
 $queueManager->getDispatcher()->addSubscriber($LogHandler);
 
 // Set some sane defaults for this example. We only visit the first level of www.dmoz.org. We stop at 10 queued resources
-$spider->getDiscovererSet()->maxDepth = 1;
-$spider->getQueueManager()->maxQueueSize = 1;
+//$spider->getDiscovererSet()->maxDepth = 1;
 
 // This time, we set the traversal algorithm to breadth-first. The default is depth-first
 $queueManager->setTraversalAlgorithm(InMemoryQueueManager::ALGORITHM_BREADTH_FIRST);
@@ -47,15 +45,12 @@ $queueManager->setTraversalAlgorithm(InMemoryQueueManager::ALGORITHM_BREADTH_FIR
 $spider->setQueueManager($queueManager);
 
 // We add an URI discoverer. Without it, the spider wouldn't get past the seed resource.
-//$spider->getDiscovererSet()->set(new CssSelectorDiscoverer("div.site-item > div > a"));
-$spider->getDiscovererSet()->set(new CssSelectorDiscoverer("#gnb a"));
+$spider->getDiscovererSet()->set(new XPathExpressionDiscoverer("//a"));
 
 // Let's tell the spider to save all found resources on the filesystem
-/*
 $spider->getDownloader()->setPersistenceHandler(
     new \VDB\Spider\PersistenceHandler\FileSerializedResourcePersistenceHandler(__DIR__ . '/results')
 );
-*/
 
 // Add some prefetch filters. These are executed before a resource is requested.
 // The more you have of these, the less HTTP requests and work for the processors
@@ -123,9 +118,14 @@ echo "\n\nDOWNLOADED RESOURCES: ";
 $downloaded = $spider->getDownloader()->getPersistenceHandler();
 foreach ($downloaded as $resource) {
     $title = $resource->getCrawler()->filterXpath('//title')->text();
-    $contentLength = (int) $resource->getResponse()->getHeaderLine('Content-Length');
-    // do something with the data
-//    echo "\n - " . str_pad("[" . round($contentLength / 1024), 4, ' ', STR_PAD_LEFT) . "KB] $title";
-    print_r($resource->getCrawler()->filter('img')->extract(['_name', 'src', 'alt']));
+    $contentLength = (int)$resource->getResponse()->getHeaderLine('Content-Length');
+    $contentLengthString = '';
+    if ($contentLength >= 1024) {
+        $contentLengthString = str_pad("[" . round($contentLength / 1024), 4, ' ', STR_PAD_LEFT) . "KB]";
+    } else {
+        $contentLengthString = str_pad("[" . $contentLength, 5, ' ', STR_PAD_LEFT) . "B]";
+    }
+    $uri = $resource->getUri()->toString();
+    echo "\n - " . $contentLengthString . " $title ($uri)";
 }
 echo "\n";

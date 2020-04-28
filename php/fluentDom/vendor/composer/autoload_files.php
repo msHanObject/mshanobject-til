@@ -7,4 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     '00032f3d1c63c80843348abd4f65f78f' => $vendorDir . '/fluentdom/fluentdom/src/FluentDOM.php',
+    'd7c9a5138b45deb428e175ae748db2c5' => $vendorDir . '/carica/phpcss/src/PhpCss.php',
+    'b7187e2c212dd315c666a01c3e4a54d2' => $vendorDir . '/fluentdom/selectors-phpcss/src/plugin.php',
+    '873b7d4c7165a46f8bfe6f253c23fb15' => $vendorDir . '/fluentdom/selectors-symfony/src/plugin.php',
 );
