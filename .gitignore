@@ -1,4 +1,6 @@
 .gitignore
+# composer #
+.lock
 # php-cs-fixer #
 .php_cs.cache
 # Directories #
