@@ -4,15 +4,20 @@ require_once 'vendor/autoload.php';
 use Dompdf\Dompdf;
 
 $ch = curl_init();
-//$url = 'https://www.naver.com/';
-//$url = 'http://snclab.kr/';
-$url = 'https://github.com/dompdf/dompdf/wiki';
+$url = 'https://www.naver.com/';
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $html = curl_exec($ch);
+
 // instantiate and use the dompdf class
 $dompdf = new Dompdf();
-//$dompdf->loadHtml('<h1>DOMPDF 데모</h1><br><p>Hello 월드!</p>');
+
+// Set dompdf options
+$options = $dompdf->getOptions();
+$options->setIsRemoteEnabled(true);
+//$options->setIsHtml5ParserEnabled(true);
+$dompdf->setOptions($options);
+
 $dompdf->loadHtml($html);
 
 // (Optional) Setup the paper size and orientation
@@ -23,5 +28,5 @@ $dompdf->render();
 
 // Output the generated PDF to Browser
 //$dompdf->stream('result.pdf', Array('Attachment'=>0));
-//$file_name = $url . '.pdf';
-file_put_contents('githubwiki.pdf', $dompdf->output());
+
+file_put_contents('output.pdf', $dompdf->output());
